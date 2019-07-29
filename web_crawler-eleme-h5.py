@@ -16,12 +16,7 @@ proxies = [
 {'http':'http://125.62.27.53:3128','https':'https://125.62.27.53:3128'},
 {'http':'http://36.250.156.10:9999','https':'https://36.250.156.10:9999'}]
 
-#cookie_list = [
-#'ubt_ssid=m52pe06yyaejcqxlz9x1686t8ie4fkxc_2019-06-08; _utrace=35cf4168f81f765256ee36d9743aba08_2019-06-08; perf_ssid=1h2wp75l1yfh4qk2l76rafn7ut5qk2d4_2019-06-08; cna=7vnuD2ai7BMCAd4sVr33SmO2; track_id=1559983155|fba4ca2b09e5344835ebb518119f4675cae8716caeaadd2338|d1f257cf884b25dcbf53e731852262a9; tzyy=7640beceed673e2b65f9b64a60332073; _bl_uid=sejv2xz3h90hF6yjzv3R21y3vw5j; ut_ubt_ssid=vkf0vjkxqugi1en8s3mfqfz1qajjxdnj_2019-07-16; l=cBjri9wuqriXPtQTBOCNCuI8Us7tIIRYouPRwd0Xi_5CP6T1K4QOkqcfoF96cjWdOc8p4tb6Mew9-etk9w5pBKCxD205.; USERID=159589; UTUSER=159589; SID=KEm8yV0CTBl3sL7DUcxkvvFPLpKlsRJlebDw; ZDS=1.0|1563636325|jNJfGb5I/WzphbYPCJMvmU1o30xRiL3AEQAgiVwJ1QMkrkcn6XXPRJqKctzVbA9O; pizza73686f7070696e67=_HHDoSEnvf2x_BZ4BJF9V3Q7q-45CmYggiJ9Ib-kSwzP2geRNRCtDzTRq0riFwCa; isg=BL6-x1x3b1p2XLq26nMntbESD9TAV4ARozwAVWjHK4H8C1_l0I-8jOTqh5FiNXqR',
-#'ubt_ssid=x16s67tlrrd4dhpqak1xncmdogmtb1iy_2019-07-21; _utrace=a22b3c83552c17e6e844b597ea50424b_2019-07-21; cna=0pO6EwacoRICAbSul5USoXE/; l=cBjqYpHnq_I_DSkJBOCwCuI8Ly7TSIRxGuPRwCcMi_5QZ6T6S6QOk4FQnF96DbBdt0Yp4082vew9-etkvvIr813kml3C.; perf_ssid=ff82cd599uhtz7txbq9b2m0ra02m6gad_2019-07-21; ut_ubt_ssid=qcpjfigc79xt8bnc3emvhk383vqfukag_2019-07-21; _bl_uid=ebj7ky01dzv2n6ln3wn0sqIbnge2; track_id=1563720206|63e9aba5865f1c2f8e2ddfefc6aa58746c341e9a5aff67b354|97778ccf71f05e67dc791843b6df9844; USERID=109018827; UTUSER=109018827; SID=r8C7qMcjy2sdx7rb7a6zbLr5pBBjchUR1FMw; ZDS=1.0|1563720206|KBKL+MCYwizxq5wQgAQ3JG8NkBpd1fPYOtI33vsfKYZO+Y3VEK/a4ioX+P+Ax2K2; isg=BIaGaYugJ6W2lvPB2c3l8i8v13zIT8uknMwcrnCvdqmEcyKNyXfIsD0CTukaLMK5'
-#]
-#user_list = ['159589','109018827']
-# 从config.txt读取
+# 从config.txt读取cookie和userId
 cookie_list = []
 user_list = []
 # 写CSV 文件
@@ -98,10 +93,11 @@ if __name__=="__main__":
             print(url)
             cookie_index = int(random.random()*2)
             #proxy_index = int(random.random()*3)
-            header1['cookie'] = cookie_list[cookie_index]
             #print(proxies[proxy_index])
-            #result = requests.get(url,headers=header1,proxies = proxies[proxy_index]).text
+            header1['cookie'] = cookie_list[cookie_index]
+
             try:
+                #result = requests.get(url,headers=header1,proxies = proxies[proxy_index]).text
                 result = requests.get(url,headers=header1).text
             except:
                 print('Request failed....Try again....')
@@ -182,8 +178,6 @@ if __name__=="__main__":
                     cin = input('输入c继续')
                     if cin == 'c':
                         event = False
-                #proxy_index = int(random.random()*3)
-                #result = requests.get(url,headers=header1,proxies = proxies[proxy_index]).text
                 # 重新读取config并设置cookie
                 get_config();
                 cookie_index = int(random.random()*2)
